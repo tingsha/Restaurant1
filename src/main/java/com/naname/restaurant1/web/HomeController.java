@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -35,6 +36,7 @@ public class HomeController {
 
     @PostMapping
     public @ResponseBody Map<String, Boolean> validateForms(@RequestBody Booking booking){
+        booking.setStatus("waiting");
         log.info(booking.toString());
 
         Map<String, Boolean> json = new HashMap<>();
@@ -59,6 +61,6 @@ public class HomeController {
 
     @ModelAttribute("dateHelper")
     public DateHelper getDateHelper(){
-        return new DateHelper();
+        return new DateHelper(ZoneId.of("America/New_York"));
     }
 }

@@ -142,14 +142,19 @@ $(function(){
                         isAllFieldsValid = false;
                 })
 
-                if (isAllFieldsValid)
+                if (isAllFieldsValid) {
                     new bs5.Toast({
-                        body: 'Wait for the email confirmation',
+                        body: 'Wait for the confirmation',
                         className: 'border-0 bg-success text-white',
                         btnCloseWhite: true,
                         placement: 'bottom-right',
                         delay: 3000
                     }).show();
+                    window.open(
+                        '/bookings',
+                        '_blank'
+                    );
+                }
             },
         });
     });

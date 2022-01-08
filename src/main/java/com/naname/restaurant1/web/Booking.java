@@ -22,15 +22,17 @@ public class Booking {
     private String name;
     private String email;
     private LocalDateTime date;
+    private String status;
 
     @Column(name = "party")
     private String partyNumber;
 
-    public Booking(String name, String email, LocalDateTime date, String partyNumber) {
+    public Booking(String name, String email, LocalDateTime date, String partyNumber, String status) {
         this.name = name;
         this.email = email;
         this.date = date;
         this.partyNumber = partyNumber;
+        this.status = status;
     }
 
     @Override

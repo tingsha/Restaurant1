@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.util.List;
 
 public interface BookingRepository extends CrudRepository<Booking, Integer> {
     @Query(value = "SELECT * FROM reservations " +
@@ -13,4 +15,6 @@ public interface BookingRepository extends CrudRepository<Booking, Integer> {
             "AND EXTRACT(MONTH FROM date) = ?3",
         nativeQuery = true)
     Booking findByEmailAndDate(String email, int day, int month);
+
+    List<Booking> findBookingsByDateAfter(LocalDateTime date);
 }
