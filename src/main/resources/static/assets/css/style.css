@@ -1445,7 +1445,8 @@ input[type=datetime-local]::-webkit-calendar-picker-indicator {
 
 .login100-form-title {
     display: block;
-    font-family: Poppins-Bold;
+    font-family: "Poppins";
+    font-weight: 700;
     font-size: 30px;
     color: #333333;
     line-height: 1.2;
@@ -1466,7 +1467,8 @@ input[type=datetime-local]::-webkit-calendar-picker-indicator {
 }
 
 .input100 {
-    font-family: Poppins-Regular;
+    font-family: "Poppins";
+    font-weight: 400;
     font-size: 15px;
     color: #555555;
     line-height: 1.2;
@@ -1502,7 +1504,8 @@ input[type=datetime-local]::-webkit-calendar-picker-indicator {
 }
 
 .focus-input100::after {
-    font-family: Poppins-Regular;
+    font-family: "Poppins";
+    font-weight: 400;
     font-size: 15px;
     color: #999999;
     line-height: 1.2;
@@ -1600,7 +1603,8 @@ input[type=datetime-local]::-webkit-calendar-picker-indicator {
 }
 
 .login100-form-btn {
-    font-family: Poppins-Medium;
+    font-family: "Poppins";
+    font-weight: 500;
     font-size: 15px;
     color: #fff;
     line-height: 1.2;
@@ -1727,10 +1731,12 @@ body,
 
 .input-group-text {
     background: none;
+    padding: 0 !important;
 }
 
 .form-control {
-    font-size: 1.6rem;
+    font-size: 1.6rem !important;
+    padding: 0px !important;
     font-family: "Roboto", sans-serif;
 }
 
@@ -1748,7 +1754,10 @@ header {
 }
 
 .admin__link {
-    text-align: right;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: right;
+    justify-content: right;
     margin: 1rem 1rem;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
@@ -1772,7 +1781,23 @@ th {
 }
 
 .fas {
-    margin: 0 10px;
+    margin: 10px 20px;
+    color: #18bc9c;
     font-size: 2rem;
     background: none;
+}
+
+.fa-times {
+    margin: 5px 10px;
+    color: #e74c3c;
+}
+
+.fa-check {
+    margin: 5px 10px;
+}
+
+.fa-info-circle {
+    margin: 0 5px;
+    font-size: 1.6rem;
+    color: #e74c3c;
 }

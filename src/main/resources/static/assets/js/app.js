@@ -151,7 +151,7 @@ $(function(){
                         delay: 3000
                     }).show();
                     window.open(
-                        '/bookings',
+                        '/bookings/page/1',
                         '_blank'
                     );
                 }

@@ -3,16 +3,13 @@ package com.naname.restaurant1.web;
 import com.naname.restaurant1.data.BookingRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 @Slf4j
 @Controller
