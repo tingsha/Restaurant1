@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         String[] resources = new String[]{
-                "/", "/bookings/page/**",
+                "/", "/bookings/**",
                 "/assets/css/**","/assets/fonts/**","/assets/images/**","/assets/js/**",
                 };
 

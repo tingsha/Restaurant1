@@ -9,6 +9,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface BookingRepository extends PagingAndSortingRepository<Booking, Integer> {
 
@@ -20,6 +21,10 @@ public interface BookingRepository extends PagingAndSortingRepository<Booking, I
     Booking findByEmailAndDate(String email, int day, int month);
 
     Page<Booking> findBookingsByDateAfter(LocalDateTime date, Pageable page);
+
+    List<Booking> findBookingsByDateAfterAndName(LocalDateTime date, String name);
+
+    List<Booking> findBookingsByDateAfterAndEmail(LocalDateTime date, String email);
 
     @Modifying
     @Transactional

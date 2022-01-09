@@ -8,14 +8,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -24,14 +23,25 @@ public class BookingsController {
 
     private final BookingRepository bookingRepository;
 
+    private class InputContent{
+        private String content;
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+    }
+
     @Autowired
     public BookingsController(BookingRepository bookingRepository) {
         this.bookingRepository = bookingRepository;
     }
 
     @GetMapping(value = "/page/{pageNumber}")
-    public String getBookings(@PathVariable int pageNumber, HttpServletRequest request, Model model){
-        model.addAttribute("isAdmin", request.isUserInRole("ROLE_ADMIN"));
+    public String getBookings(@PathVariable int pageNumber, Model model){
         log.info("isAdmin: " + model.getAttribute("isAdmin"));
 
         ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of("America/New_York"));
@@ -42,6 +52,35 @@ public class BookingsController {
         model.addAttribute("isFirstPage", !bookings.hasPrevious());
         model.addAttribute("pageNumber", pageNumber);
         model.addAttribute("bookings", bookings.getContent());
+        return "bookings";
+    }
+
+    @PostMapping(value = "/search")
+    public String findBookings(@ModelAttribute("input") InputContent inputContent, Model model){
+        ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of("America/New_York"));
+        List<Booking> getBookingByName = bookingRepository.findBookingsByDateAfterAndName(zonedDateTime.toLocalDateTime(),
+                inputContent.getContent());
+
+        List<Booking> getBookingByEmail = bookingRepository.findBookingsByDateAfterAndEmail(zonedDateTime.toLocalDateTime(),
+                inputContent.getContent());
+
+        if (getBookingByName.size() > 0){
+            model.addAttribute("bookings", getBookingByName);
+        } else if(getBookingByEmail.size() > 0){
+            model.addAttribute("bookings", getBookingByEmail);
+        } else{
+            model.addAttribute("bookings", new ArrayList<>());
+        }
+
+        model.addAttribute("isLastPage", true);
+        model.addAttribute("isFirstPage", true);
+        model.addAttribute("pageNumber", 0);
+
+        return "bookings";
+    }
+
+    @GetMapping
+    public String getBookings(){
         return "bookings";
     }
 
@@ -61,5 +100,15 @@ public class BookingsController {
     public String resetStatus(@PathVariable int page, @PathVariable int id){
         bookingRepository.updateStatus(id, "waiting");
         return "redirect:/bookings/page/" + page;
+    }
+
+    @ModelAttribute("isAdmin")
+    public boolean isAdmin(HttpServletRequest request){
+        return request.isUserInRole("ROLE_ADMIN");
+    }
+
+    @ModelAttribute("input")
+    public InputContent getInputContent(){
+        return new InputContent();
     }
 }
