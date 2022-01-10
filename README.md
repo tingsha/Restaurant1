@@ -1,5 +1,5 @@
 # Restaurant
-My first spring application
+http://restaurant1-env.eba-v6veg9zu.eu-north-1.elasticbeanstalk.com/
 # Install
 1. Git clone
 2. Download and install PostgreSQL
